@@ -41,6 +41,7 @@ public class PanelInformacion extends JPanel implements ActionListener {
 		labResultado = new JLabel("Suma:", SwingConstants.RIGHT);
 		txtFilas = new JTextField(2);
 		txtCols = new JTextField(2);
+		
 		butGenerarMatriz = new JButton("Generar Matriz");
 		btnColor = new JButton("Cambiar color");
 		btnColor.addActionListener(this);
