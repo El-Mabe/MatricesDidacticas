@@ -12,47 +12,52 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 @SuppressWarnings("serial")
-public class PanelInformacion extends JPanel implements ActionListener{
+public class PanelInformacion extends JPanel implements ActionListener {
 	private JLabel labFilas;
 	private JLabel labCols;
 	private JLabel labResultado;
 	private JTextField txtFilas;
 	private JTextField txtCols;
 	private JButton butGenerarMatriz;
-	
+	private JButton btnColor;
+
 	private JTextField txtResultado;
-	
+
 	private final static String GENERAR_MATRIZ = "GENERAR_MATRIZ";
 	private final static String GUARDAR = "GUARDAR";
 	private final static String CARGAR = "CARGAR";
 	private final static String COLOR = "COLOR";
-	
+
 	private InterfazMatematicas principal;
-	
-	public PanelInformacion(InterfazMatematicas ventana){
+
+	public PanelInformacion(InterfazMatematicas ventana) {
 		principal = ventana;
-		
+
 		setBorder(new TitledBorder("Información"));
 		setLayout(new FlowLayout());
-		
-		labFilas = new JLabel("# de Filas:",SwingConstants.RIGHT);
-		labCols  = new JLabel("# de Columnas:",SwingConstants.RIGHT);
-		labResultado = new JLabel("Suma:",SwingConstants.RIGHT);
+
+		labFilas = new JLabel("# de Filas:", SwingConstants.RIGHT);
+		labCols = new JLabel("# de Columnas:", SwingConstants.RIGHT);
+		labResultado = new JLabel("Suma:", SwingConstants.RIGHT);
 		txtFilas = new JTextField(2);
-		txtCols  = new JTextField(2);
-		butGenerarMatriz = new JButton("Generar Matriz");
+		txtCols = new JTextField(2);
 		
+		butGenerarMatriz = new JButton("Generar Matriz");
+		btnColor = new JButton("Cambiar color");
+		btnColor.addActionListener(this);
+		btnColor.setActionCommand(COLOR);
+
 		txtResultado = new JTextField(4);
 		txtResultado.setEditable(false);
-		
+
 		txtFilas.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtCols.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtResultado.setHorizontalAlignment(SwingConstants.RIGHT);
-		
+
 		butGenerarMatriz.addActionListener(this);
-		
+
 		butGenerarMatriz.setActionCommand(GENERAR_MATRIZ);
-		
+
 		add(labFilas);
 		add(txtFilas);
 		add(labCols);
@@ -60,25 +65,30 @@ public class PanelInformacion extends JPanel implements ActionListener{
 		add(butGenerarMatriz);
 		add(labResultado);
 		add(txtResultado);
+		add(btnColor);
 	}
-	
-	public int darFilas() throws NumberFormatException{
+
+	public int darFilas() throws NumberFormatException {
 		return Integer.parseInt(txtFilas.getText());
 	}
-	
-	public int darCols() throws NumberFormatException{
+
+	public int darCols() throws NumberFormatException {
 		return Integer.parseInt(txtCols.getText());
 	}
-	
-	public void cambiarResultado(int res){
-		txtResultado.setText(res+"");
+
+	public void cambiarResultado(int res) {
+		txtResultado.setText(res + "");
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		String comando = e.getActionCommand();
-		if(comando.equals(GENERAR_MATRIZ)){
-			principal.generarMatriz();			
+		if (comando.equals(GENERAR_MATRIZ)) {
+			principal.generarMatriz();
 		}
+		if (comando.equals(COLOR)) {
+			principal.cambiarColor();
+		}
+
 	}
 }
