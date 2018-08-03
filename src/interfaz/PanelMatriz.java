@@ -20,6 +20,7 @@ public class PanelMatriz extends JPanel implements MouseListener {
 		setBackground(Color.WHITE);
 		addMouseListener(this);
 		matrizDidactica = new Casilla[0][0];
+		
 	}
 
 	public void cambiarMatriz(Casilla[][] md) {
@@ -48,10 +49,16 @@ public class PanelMatriz extends JPanel implements MouseListener {
 	}
 
 	public Color generarColorAleatorio() {
-		return null;
+		int r = (int) (Math.random() * 256);
+		int g = (int) (Math.random() * 256);
+		
+		int b = (int) (Math.random() * 256);
+		Color colorAleatorio = new Color(r, g, b);
+		return colorAleatorio;
 	}
 
 	public void cambiarFondo(Color nuevoColor) {
+		setBackground(nuevoColor);
 	}
 
 	@Override
