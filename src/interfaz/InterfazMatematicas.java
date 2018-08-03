@@ -1,6 +1,7 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -9,75 +10,78 @@ import hilos.HiloMatriz;
 import mundo.Matematica;
 
 @SuppressWarnings("serial")
-public class InterfazMatematicas extends JFrame{
+public class InterfazMatematicas extends JFrame {
 	private Matematica mat;
 	private PanelInformacion panelInformacion;
 	private PanelMatriz panelMatriz;
 	private HiloMatriz hiloM;
-	
-	public InterfazMatematicas(){
+
+	public InterfazMatematicas() {
 		setLayout(new BorderLayout());
 		setTitle("Matemáticas Didacticas");
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		
+
 		mat = new Matematica();
 		panelInformacion = new PanelInformacion(this);
 		panelMatriz = new PanelMatriz(this);
-		
+
 		add(panelInformacion, BorderLayout.NORTH);
 		add(panelMatriz, BorderLayout.CENTER);
 		pack();
 	}
-	
-	private void redimensionarVentana(int f, int c){
+
+	private void redimensionarVentana(int f, int c) {
 
 	}
-	
-	private void mostrarNuevaMatriz(){
+
+	private void mostrarNuevaMatriz() {
 		panelMatriz.cambiarMatriz(mat.darMatrizDidactica());
 		redimensionarVentana(mat.darMatrizDidactica().length, mat.darMatrizDidactica()[0].length);
-		panelMatriz.repaint();		
+		panelMatriz.repaint();
 	}
-	
-	public void generarMatriz(){
-		try{
+
+	public void generarMatriz() {
+		try {
 			int f = panelInformacion.darFilas();
 			int c = panelInformacion.darCols();
-			
-			mat = new Matematica(f,c);
+
+			mat = new Matematica(f, c);
 			mostrarNuevaMatriz();
-			
-		}catch(NumberFormatException nfexc){
+
+		} catch (NumberFormatException nfexc) {
 			JOptionPane.showMessageDialog(this, "El # de Filas y # de Columnas deben\nser valores enteros positivos.");
 		}
 	}
-	
-	public void sumar(){
-		if(hiloM==null || !hiloM.isAlive()) {
+
+	public void sumar() {
+		if (hiloM == null || !hiloM.isAlive()) {
 			hiloM = new HiloMatriz(mat, this);
 			hiloM.start();
 		}
 	}
-	
+
 	public void cambiarColor() {
+		Color nuevo = panelMatriz.generarColorAleatorio();
+		panelMatriz.cambiarFondo(nuevo);
+
 	}
-	
-	public void refrescarMatriz(){
+
+	public void refrescarMatriz() {
 		panelMatriz.repaint();
 		panelInformacion.cambiarResultado(mat.darResultadoParcial());
 	}
-	
-	public void cambiarCalculando(boolean calculando){
+
+	public void cambiarCalculando(boolean calculando) {
 		mat.cambiarCalculando(calculando);
 	}
-	
-	public void cargar(){
+
+	public void cargar() {
 	}
-	
-	public void guardar(){
+
+	public void guardar() {
 	}
-	
-	public static void main(String[] args){
+
+	public static void main(String[] args) {
 		InterfazMatematicas ventana;
 		ventana = new InterfazMatematicas();
 		ventana.setVisible(true);

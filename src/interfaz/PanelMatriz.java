@@ -50,6 +50,7 @@ public class PanelMatriz extends JPanel implements MouseListener {
 	public Color generarColorAleatorio() {
 		int r = (int) (Math.random() * 256);
 		int g = (int) (Math.random() * 256);
+		
 		int b = (int) (Math.random() * 256);
 		Color colorAleatorio = new Color(r, g, b);
 		return colorAleatorio;
