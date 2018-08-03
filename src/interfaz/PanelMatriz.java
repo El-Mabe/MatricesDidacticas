@@ -10,49 +10,54 @@ import javax.swing.JPanel;
 import mundo.Casilla;
 
 @SuppressWarnings("serial")
-public class PanelMatriz extends JPanel implements MouseListener{
+public class PanelMatriz extends JPanel implements MouseListener {
 	public final static int TAMANO_LADO_CASILLA = 30;
 	private Casilla[][] matrizDidactica;
 	private InterfazMatematicas principal;
-	
-	public PanelMatriz(InterfazMatematicas ventana){
+
+	public PanelMatriz(InterfazMatematicas ventana) {
 		principal = ventana;
 		setBackground(Color.WHITE);
 		addMouseListener(this);
 		matrizDidactica = new Casilla[0][0];
 		
 	}
-	
-	public void cambiarMatriz(Casilla[][] md){
+
+	public void cambiarMatriz(Casilla[][] md) {
 		matrizDidactica = md;
 	}
-	
-	public void paintComponent(Graphics g){
+
+	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
+
 		for (int i = 0; i < matrizDidactica.length; i++) {
 			for (int j = 0; j < matrizDidactica[i].length; j++) {
-				int x = j*TAMANO_LADO_CASILLA;
-				int y = i*TAMANO_LADO_CASILLA;
-				if(matrizDidactica[i][j].darEstado()==Casilla.ESTADO_NORMAL){
+				int x = j * TAMANO_LADO_CASILLA;
+				int y = i * TAMANO_LADO_CASILLA;
+				if (matrizDidactica[i][j].darEstado() == Casilla.ESTADO_NORMAL) {
 					g.setColor(Color.LIGHT_GRAY);
-				}else{
+				} else {
 					g.setColor(Color.YELLOW);
 				}
 				g.fillRect(x, y, TAMANO_LADO_CASILLA, TAMANO_LADO_CASILLA);
 				g.setColor(Color.BLUE);
 				g.drawRect(x, y, TAMANO_LADO_CASILLA, TAMANO_LADO_CASILLA);
-				g.drawString(matrizDidactica[i][j].darValor()+"", x+TAMANO_LADO_CASILLA/4, y+3*TAMANO_LADO_CASILLA/4);
+				g.drawString(matrizDidactica[i][j].darValor() + "", x + TAMANO_LADO_CASILLA / 4,
+						y + 3 * TAMANO_LADO_CASILLA / 4);
 			}
 		}
 	}
-	
-	public Color generarColorAleatorio() {
-		return null;
-	}
-	
-	public void cambiarFondo(Color nuevoColor) {
 
+	public Color generarColorAleatorio() {
+		int r = (int) (Math.random() * 256);
+		int g = (int) (Math.random() * 256);
+		
+		int b = (int) (Math.random() * 256);
+		Color colorAleatorio = new Color(r, g, b);
+		return colorAleatorio;
+	}
+
+	public void cambiarFondo(Color nuevoColor) {
 		setBackground(nuevoColor);
 	}
 
@@ -75,5 +80,5 @@ public class PanelMatriz extends JPanel implements MouseListener{
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-	}	
+	}
 }
