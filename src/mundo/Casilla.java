@@ -6,6 +6,8 @@ public class Casilla {
 	private int valor;
 	private char estado;
 	
+	
+	
 	public Casilla(int v){
 		valor = v;
 		estado = ESTADO_NORMAL;
