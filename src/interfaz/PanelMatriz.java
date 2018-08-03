@@ -20,6 +20,7 @@ public class PanelMatriz extends JPanel implements MouseListener{
 		setBackground(Color.WHITE);
 		addMouseListener(this);
 		matrizDidactica = new Casilla[0][0];
+		
 	}
 	
 	public void cambiarMatriz(Casilla[][] md){
@@ -51,6 +52,7 @@ public class PanelMatriz extends JPanel implements MouseListener{
 	}
 	
 	public void cambiarFondo(Color nuevoColor) {
+		setBackground(nuevoColor);
 	}
 
 	@Override
